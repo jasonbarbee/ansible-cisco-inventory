@@ -106,5 +106,10 @@ Now you can import this file to Totalcare.
 
 TODO: Possibly discuss all the steps to onboard a customer to Totalcare.
 
+# FAQ / Problems
+SSH won't connect to very old Cisco devices, dhe key is too small
+https://www.petenetlive.com/KB/Article/0001245
+
+
 ### License
 MIT - Jason Barbee 2017
