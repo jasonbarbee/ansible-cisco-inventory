@@ -1,11 +1,12 @@
-# Author Jason Barbee
+# Copyright Jason Barbee 2017
 # www.TekLinks.com
 # jbarbee@teklinks.com
-# License GPL v3
-# This uses modules from Network To Code library
+# License MIT
+# This depends on modules from Network To Code library. Many thanks to them for a great library.
+# https://github.com/networktocode/ntc-ansible
 
 ---
-  - name: Show Versions
+  - name: Build CSV for MyDevices.csv
     hosts: all
     gather_facts: no
     connection: local
@@ -26,7 +27,7 @@
           provider: "{{ cli }}"
 
       # Network To Code module to grab inventory data
-      - name: Show Inventory for Serials
+      - name: Show Inventory
         ntc_show_command:
           connection: ssh
           platform: cisco_ios_ssh
@@ -41,26 +42,19 @@
 
       - name: Bundle data in a new hash, but only if Serial is not blank.
         set_fact:
-         inventory: "{{ inventory|default([]) + [ {'hostname': ansible_net_hostname, 'ip': inventory_hostname, 'name': item.descr, 'serial': item.sn }] }}"
+         inventory: "{{ inventory|default([]) + [ {'hostname': ansible_net_hostname, 'ip': inventory_hostname, 'name': item.descr, 'serial': item.sn, 'version': ansible_net_version } ] }}"
         with_items: "{{ results.response }}"
         when: item.sn != ''
 
-      # - name: Debug Check if you want
-      #   debug: var=serials
-
-      # Write Headers - hostname,IP,ProductID,serial
-      - name: Write inventory.csv
-        run_once: true
-        shell: echo hostname,IP-Address,Product-ID,Serial >> inventory.csv
-        with_items: "{{ inventory }}"
-
+      #- name: Debug Check if you want
+      #  debug: var=inventory
 
       # Write Headers for Cisco My Devices - hostname,IP,ProductID,serial
       - name: Write mydevices.csv
         run_once: true
-        shell: echo Serial Number,Device Name / Hostname,Tags,Notes > mydevices.csv
+        shell: echo Serial Number,Device Name,Tags,Notes > mydevices.csv
         with_items: "{{ inventory }}"
 
       - name: Write My Devices CSV File
-        shell: echo {{ item.serial }},{{ item.hostname }},{{ item.ip }} >> mydevices.csv
+        shell: 'echo {{ item.serial }},{{ item.hostname }},"IP-"{{ item.ip }} "|" "IOS-{{ item.version }}", >> mydevices.csv'
         with_items: "{{ inventory }}"

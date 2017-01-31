@@ -72,6 +72,12 @@ https://cway.cisco.com/mydevices/
 Don't worry about duplicates, or all the module serial numbers. It will be helpful in the reports.
 * Choose Add New Devices and Import using the CSV Template option.
 
+## You can capture more data if you want!
+### Customizing Options Tags and Notes fields:
+1. open up the cisco-mydevices.yml file
+2. collect the data you want (this may include using other playbooks)
+3. Include the variable in the has string and again in the CSV parsing output.
+
 * Now you can run EOX reports on any Device or module in the entire scan!
 * You can also share your Device Information with up to 15 other people for smartnet quoting or rough inventory review.
 
