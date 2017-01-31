@@ -47,6 +47,8 @@ pip install terminal
 # Now to the Network Scanner
 This does not use SNMP. It is a CLI parsing tool. So as long as we can login, we are good.
 These modules **require SSH**. If you need telnet there is a way to make that happen. Open an issue if needed and I'll document it. Or the next time I need telnet I will document it.
+
+Getting Started:
 1. Make sure our ansible.cfg is within ntc-ansible folder. It forces the library folder.
 2. Onboard devices with Ansible inventory file
 Example
@@ -89,6 +91,5 @@ Now you can import this file to Totalcare.
 
 TODO: Possibly discuss all the steps to onboard a customer to Totalcare.
 
-## License
-Copyright Jason Barbee 2017.
-MIT License
+### License
+MIT - Jason Barbee 2017
