@@ -5,7 +5,7 @@ For people who don't have time to install a collector, discover subnets, deal wi
 ## Goal: Help Make Cisco Inventories easier and automated.
 
 ## Why use this?
-1. You onboard the device once in bulk. No SNMP or discovery guess work.
+1. You onboard the device once - add it to Ansible inventory. No SNMP or discovery guess work.
 2. Automation value add - Now that device can be automated by Ansible for other things.
 3. No data leaves the network other than the CSV.
 4. Easy EOX reports and contract renewal quoting for customers.
