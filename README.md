@@ -11,7 +11,7 @@ For people who don't have time to install a collector, discover subnets, deal wi
 4. Easy EOX reports and contract renewal quoting for customers.
 5. Easy IOS version reports for customer.
 6. Walk away with a Cisco integrated deliverable they can access, and you can come back and run the scan any time.
-
+7. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
 
 ## Prep work - you need Ansible and NTC-Ansible
 1. Install Ansible
@@ -91,12 +91,13 @@ I am capturing 2 "TAGS" - Version, and IP Address in the default code.
 ## See EOX Reports for your Cisco Network
 ![](screenshots/EOL-Report-Cleaned.png)
 
-
 ## See your Contracts at a glance.
 ![](screenshots/Contract-Renewal-Cleaned.png)
 
 # Onboarding to Totalcare
 Select all the devices and click Download in SNTC 3.x Format.
+![](screenshots/Totalcare-export.png)
+
 Now you can import this file to Totalcare.
 
 TODO: Possibly discuss all the steps to onboard a customer to Totalcare.
