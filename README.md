@@ -66,17 +66,21 @@ port=22
 $ ansible-playbook -i inventory.yml cisco-mydevices.yml
 ```
 4. You will get a file - *mydevices.csv*. This file can be dragged and uploaded straight to Cisco My Devices Tool.
+Make sure you have a Cisco.com username
 
-https://cway.cisco.com/mydevices/
+Open Cisco Tool MyDevices
+### [Cisco MyDevices](https://cway.cisco.com/mydevices/)
 
-Don't worry about duplicates, or all the module serial numbers. It will be helpful in the reports.
 * Choose Add New Devices and Import using the CSV Template option.
+( Don't worry about duplicates, or all the module serial numbers. It will be helpful in the reports.) 
 
-## You can capture more data if you want!
+# You can capture more data if you want!
 ### Customizing Options Tags and Notes fields:
 1. open up the cisco-mydevices.yml file
 2. collect the data you want (this may include using other playbooks)
 3. Include the variable in the has string and again in the CSV parsing output.
+
+I am capturing 2 "TAGS" - Version, and IP Address in the default code.
 
 * Now you can run EOX reports on any Device or module in the entire scan!
 * You can also share your Device Information with up to 15 other people for smartnet quoting or rough inventory review.
