@@ -24,12 +24,13 @@ https://github.com/networktocode/ntc-ansible
 One simple way to fix Ansible paths for this to work is to create a new folder for this repo, then clone this repo into it.
 ```git clone https://github.com/networktocode/ntc-ansible --recursive```
 
-Example that will work every time
+Example that should work every time
 ```
 $ git clone https://github.com/networktocode/ntc-ansible.git --recursive
+$ wget https://github.com/jasonbarbee/ansible-cisco-inventory/archive/master.zip ansible-inventory.zip
+$ unzip master.zip -d ntc-ansible
 $ cd ntc-ansible
 ```
-Clone/Unzip my repo inside ntc-ansible
 
 Test your NTC Code library paths. If it does not work, my script will not work. 
 If you get a working Help Document from this command you are good to go.
