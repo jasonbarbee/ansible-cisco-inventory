@@ -1,0 +1,66 @@
+# Author Jason Barbee
+# www.TekLinks.com
+# jbarbee@teklinks.com
+# License GPL v3
+# This uses modules from Network To Code library
+
+---
+  - name: Show Versions
+    hosts: all
+    gather_facts: no
+    connection: local
+
+    # this is for the IOS Module provider
+    vars:
+      cli:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        transport: cli
+
+    tasks:
+      # Collect all facts from the device - this helps set the hostname
+      - ios_facts:
+          gather_subset:
+              - config
+          provider: "{{ cli }}"
+
+      # Network To Code module to grab inventory data
+      - name: Show Inventory for Serials
+        ntc_show_command:
+          connection: ssh
+          platform: cisco_ios_ssh
+          port: 22
+          command: 'show inventory'
+          host: "{{ inventory_hostname }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        register: results
+
+      - debug: var=results.response
+
+      - name: Bundle data in a new hash, but only if Serial is not blank.
+        set_fact:
+         inventory: "{{ inventory|default([]) + [ {'hostname': ansible_net_hostname, 'ip': inventory_hostname, 'name': item.descr, 'serial': item.sn }] }}"
+        with_items: "{{ results.response }}"
+        when: item.sn != ''
+
+      # - name: Debug Check if you want
+      #   debug: var=serials
+
+      # Write Headers - hostname,IP,ProductID,serial
+      - name: Write inventory.csv
+        run_once: true
+        shell: echo hostname,IP-Address,Product-ID,Serial >> inventory.csv
+        with_items: "{{ inventory }}"
+
+
+      # Write Headers for Cisco My Devices - hostname,IP,ProductID,serial
+      - name: Write mydevices.csv
+        run_once: true
+        shell: echo Serial Number,Device Name / Hostname,Tags,Notes > mydevices.csv
+        with_items: "{{ inventory }}"
+
+      - name: Write My Devices CSV File
+        shell: echo {{ item.serial }},{{ item.hostname }},{{ item.ip }} >> mydevices.csv
+        with_items: "{{ inventory }}"
