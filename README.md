@@ -86,6 +86,9 @@ I am capturing 2 "TAGS" - Version, and IP Address in the default code.
 * You can also share your Device Information with up to 15 other people for smartnet quoting or rough inventory review.
 
 ## See all your Inventory, modules, Site Address, and Contract info.
+![](screenshots/MyDevices-Cleaned.png)
+
+## Cisco MyDevice View Per Chassis
 ![](screenshots/Device-View-Cleaned.png)
 
 ## See EOX Reports for your Cisco Network
