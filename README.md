@@ -144,12 +144,14 @@ Tested on 2950s, 3560s, 2800s, 3850s, 2960Xs...
 ### How about Telnet?
 PyNTC does not support NetMiko's cisco_ios_telnet option and port number. We have to modify their library a little to make this work.
 Once you do this, you should be able to run ntc_config_commands to 
-* set your domain - ip domain-name mycooldomain.net
-* generate SSH keys - crypto key generate rsa modulus 2048
+* set your domain - 
+    * ip domain-name mycooldomain.net
+* generate SSH keys - 
+    * crypto key generate rsa modulus 2048
 * enable it on the VTYs
-            - ip ssh version 2
-            - line vty 0 {{ max_vty }}
-            - transport input ssh telnet
+    * ip ssh version 2
+    * line vty 0 {{ max_vty }}
+    * transport input ssh telnet
 
 I have added some example tooling to get you started. It's untested. Next telnet assessment I do I will clean it up.
 
