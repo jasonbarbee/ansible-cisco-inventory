@@ -121,10 +121,10 @@ $ ansible-playbook -i inventory.yml backup-configs.yml
 ```
 
 # FAQ
-* SSH won't connect to very old Cisco devices, dhe key is too small
+### SSH won't connect to very old Cisco devices, dhe key is too small
 https://www.petenetlive.com/KB/Article/0001245
 
-* Backups Fail for Old Devices?
+### Backups Fail for Old Devices?
 This is resulting from a call from PyNTC library to NetMiko. The Author has not provided a way to push the "delay_factor" command - which increases the timeout for these old devices.
 I submitted a pull request... but we're all busy I guess, it's still in limbo.
 Quick fix:
@@ -141,7 +141,7 @@ Tested on 2950s, 3560s, 2800s, 3850s, 2960Xs...
         return True
 ```
 
-* How about Telnet?
+### How about Telnet?
 PyNTC does not support NetMiko's cisco_ios_telnet option and port number. We have to modify their library a little to make this work.
 Once you do this, you should be able to run ntc_config_commands to 
 * set your domain - ip domain-name mycooldomain.net
