@@ -1,0 +1,31 @@
+---
+  - name: Configure SSH
+    hosts: all
+    gather_facts: yes
+    connection: local
+
+    tasks:
+    # this will fail the first time. When it's run once to get your keys, just comment it out.
+      - ntc_config_command:
+          connection: ssh
+          platform: cisco_ios_ssh
+          port: 23
+          commands:
+            - ip domain-name mycooldomain.net
+            - crypto key generate rsa modulus 2048
+          host: "{{ inventory_hostname }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+          
+    # this will configure ssh parameters
+      - ntc_config_command:
+          connection: ssh
+          platform: cisco_ios_ssh
+          port: 23
+          commands:
+            - ip ssh version 2
+            - line vty 0 {{ max_vty }}
+            - transport input ssh telnet
+          host: "{{ inventory_hostname }}"
+          username: "{{ username }}"
+          password: "{{ password }}"

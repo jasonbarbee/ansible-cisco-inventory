@@ -6,13 +6,12 @@ For people who don't have time to install a collector, discover subnets, deal wi
 
 ## Why use this?
 1. You onboard the device once - add it to Ansible inventory. No SNMP or discovery guess work.
-2. Automation - Now that device can be automated by Ansible for other things.
+2. Automation - Go ahead and use Ansible for other things.
 3. No data leaves the network other than the CSV.
 4. Easy EOX reports and contract renewal quoting for customers.
 5. Easy IOS version reports for customer.
-6. Walk away with a Cisco integrated deliverable they can access, and you can come back and run the scan any time.
-7. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
-8. Assessment tooling to run mass commands and backups for auditing your network.
+6. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
+7. Assessment tooling to run mass commands and backups for auditing your network.
 
 ## Prep work - you need Ansible and NTC-Ansible
 1. Install Ansible
@@ -39,7 +38,7 @@ If you get a working Help Document from this command you are good to go.
 $ ansible-doc ntc_file_copy
 ```
 
-Install NTC-Ansible Depedencies
+### Install NTC-Ansible Depedencies
 ```
 pip install ntc-ansible
 sudo apt-get install zlib1g-dev libxml2-dev libxslt-dev python-dev
@@ -47,8 +46,13 @@ pip install terminal
 ```
 
 # Now to Configure Ansible
-This does not use SNMP. It is a CLI parsing tool. So as long as we can login, we are good.
-These modules **require SSH**. If you need telnet there is a way to make that happen. Open an issue if needed and I'll document it. Or the next time I need telnet I will document it.
+This does not use SNMP. It is a CLI parsing tool. So as long as we can login via SSH, we are good.
+These modules **require SSH**. 
+You can use Ansible and Telnet to provision SSH. But there's too much tooling outside my control that is hard wired for SSH only.
+(NetMiko supports it. PyNTC and NTC-Ansible does not).
+An example - config playbook (config-ssh.yml) is included if you need some guidance on bulk enabling ssh through telnet.
+
+See the FAQ below on enabling Telnet Hack to PyNTC if this applies to you.
 
 Getting Started:
 1. Make sure our ansible.cfg is within ntc-ansible folder. It forces the library folder.
@@ -135,6 +139,30 @@ Tested on 2950s, 3560s, 2800s, 3850s, 2960Xs...
             self.native.send_command_timing('\n',delay_factor=2)
             self.native.find_prompt()
         return True
+```
+
+* How about Telnet?
+PyNTC does not support NetMiko's cisco_ios_telnet option and port number. We have to modify their library a little to make this work.
+Once you do this, you should be able to run ntc_config_commands to 
+* set your domain - ip domain-name mycooldomain.net
+* generate SSH keys - crypto key generate rsa modulus 2048
+* enable it on the VTYs
+            - ip ssh version 2
+            - line vty 0 {{ max_vty }}
+            - transport input ssh telnet
+
+I have added some example tooling to get you started. It's untested. Next telnet assessment I do I will clean it up.
+
+add this into /usr/local/lib/python2.7/dist-packages/pyntc/devices/ios_device.py
+    under Class IOSDevice(BaseDevice)
+    right after self.native = None
+```python2
+        if port == 23:
+            self.device_type = 'cisco_ios_telnet'
+            self.port = 23
+        else:
+            self.device_type = 'cisco_ios_ssh'
+            self.port = 22
 ```
 ### License
 MIT
