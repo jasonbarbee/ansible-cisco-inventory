@@ -74,12 +74,12 @@ Scan the network
 ```bash
 $ ansible-playbook -i inventory.yml cisco-mydevices.yml
 ```
-You will get a file - *mydevices.csv*. This file can be dragged and uploaded straight to Cisco My Devices Tool.
-Make sure you have a Cisco.com username
+You will get a file - *mydevices.csv*. This file can be dragged and uploaded straight to Cisco My Devices Tool (below)
 
-# Uploading to Cisco MyDevices
-Open Cisco Tool MyDevices
-### [Cisco MyDevices](https://cway.cisco.com/mydevices/)
+## Uploading to Cisco MyDevices
+## [Cisco MyDevices Tool](https://cway.cisco.com/mydevices/)
+
+
 
 * Choose Add New Devices and Import using the CSV Template option.
 ( Don't worry about duplicates, or all the module serial numbers. It will be helpful in the reports.) 
