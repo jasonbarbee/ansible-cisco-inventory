@@ -9,7 +9,7 @@ For people who don't have time to install a collector, discover subnets, deal wi
 2. Automation - Go ahead and use Ansible for other things.
 3. No data leaves the network other than the CSV.
 4. Easy EOX reports and contract renewal quoting for customers.
-5. Easy IOS version reports for customer.
+5. Easy IOS version reports via Tagging or CSV export.
 6. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
 7. Assessment tooling to run mass commands and backups for auditing your network.
 
@@ -166,5 +166,14 @@ add this into /usr/local/lib/python2.7/dist-packages/pyntc/devices/ios_device.py
             self.device_type = 'cisco_ios_ssh'
             self.port = 22
 ```
+
+## Ideas/Future
+* Alternate username/password attempt.
+* Try to make Telnet more accessible.
+* Try to post show output to the CLI Analyzer Tools API for Assessment style data.
+
+## Contributing
+I'm open to any pull requests!
+
 ### License
 MIT
