@@ -1,0 +1,23 @@
+---
+  - name: Backup Configs
+    hosts: all
+    gather_facts: yes
+    connection: local
+
+    tasks:
+      - name: Create backups directory
+        file: path=backups state=directory
+        run_once: true
+
+      - name: Creates Client directory
+        file: path="backups/{{ client }}" state=directory
+        run_once: true
+
+      - name: SAVE AND BACKUP CONFIGS
+        ntc_save_config:
+          local_file=backups/{{ client }}/config_{{ inventory_hostname }}_{{ ansible_date_time.date | replace('-','_') }}.cfg
+          platform=cisco_ios_ssh
+          port={{ port }}
+          host={{ inventory_hostname }}
+          username="{{ username }}"
+          password="{{ password }}"
