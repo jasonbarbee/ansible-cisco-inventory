@@ -29,9 +29,9 @@
       # Network To Code module to grab inventory data
       - name: Show Inventory
         ntc_show_command:
-          connection: ssh
-          platform: cisco_ios_ssh
-          port: 22
+          connection: "{{ connection }}"
+          platform: "{{ platform }}"
+          port: "{{ port }}"
           command: 'show inventory'
           host: "{{ inventory_hostname }}"
           username: "{{ username }}"

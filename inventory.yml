@@ -1,7 +1,12 @@
 [routers]
 192.168.1.1
 
+[telnetrouters]
+192.168.1.2 connection='telnet' platform='cisco_ios'
+
 [routers:vars]
 username='username'
 password='password'
 port=22
+connection='ssh'
+platform='cisco_ios_ssh'

@@ -16,7 +16,7 @@
       - name: SAVE AND BACKUP CONFIGS
         ntc_save_config:
           local_file=backups/{{ client }}/config_{{ inventory_hostname }}_{{ ansible_date_time.date | replace('-','_') }}.cfg
-          platform=cisco_ios_ssh
+          platform={{ platform }}
           port={{ port }}
           host={{ inventory_hostname }}
           username="{{ username }}"

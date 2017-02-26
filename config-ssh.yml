@@ -8,8 +8,8 @@
     # this will fail the first time. When it's run once to get your keys, just comment it out.
       - ntc_config_command:
           connection: ssh
-          platform: cisco_ios_ssh
-          port: 23
+          platform: " {{ platform }}"
+          port: "{{ port }}"
           commands:
             - ip domain-name mycooldomain.net
             - crypto key generate rsa modulus 2048
@@ -19,9 +19,9 @@
           
     # this will configure ssh parameters
       - ntc_config_command:
-          connection: ssh
-          platform: cisco_ios_ssh
-          port: 23
+          connection: "{{ connection }}"
+          platform: "{{ platform }}"
+          port: "{{ port }}"
           commands:
             - ip ssh version 2
             - line vty 0 {{ max_vty }}

@@ -28,7 +28,8 @@ Example that should work every time
 ```
 $ git clone https://github.com/networktocode/ntc-ansible.git --recursive
 $ wget https://github.com/jasonbarbee/ansible-cisco-inventory/archive/master.zip ansible-inventory.zip
-$ unzip master.zip -d ntc-ansible
+$ unzip master.zip
+$ cp ansible-cisco-inventory/* ntc-ansible
 $ cd ntc-ansible
 ```
 
@@ -55,7 +56,7 @@ An example - config playbook (config-ssh.yml) is included if you need some guida
 See the FAQ below on enabling Telnet Hack to PyNTC if this applies to you.
 
 Getting Started:
-1. Make sure our ansible.cfg is within ntc-ansible folder. It forces the library folder.
+1. Make sure our ansible.cfg is within ntc-ansible folder. It forces the library folder local for NTC-Ansible to load in the same folder. It's automatically loaded in this repo.
 2. Onboard devices with Ansible inventory file
 Example
 ```yaml
