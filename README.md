@@ -176,5 +176,9 @@ add this into /usr/local/lib/python2.7/dist-packages/pyntc/devices/ios_device.py
 ## Contributing
 I'm open to any pull requests!
 
+## Helpful Resources to Learn Ansible Tricks
+[Ansible Tricks](http://perfspy.blogspot.com/2016/06/ansible-tricks.html)
+
+
 ### License
 MIT
