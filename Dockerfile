@@ -75,5 +75,5 @@ WORKDIR /ansible
 
 RUN pip install git+git://github.com/jasonbarbee/mnet.git
 RUN pip install pydot graphviz
-RUN apt-get install graphviz
+RUN apt-get -y install graphviz
 RUN git clone https://github.com/jasonbarbee/mnet /mnet
