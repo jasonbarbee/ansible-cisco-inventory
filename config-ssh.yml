@@ -1,11 +1,15 @@
 ---
   - name: Configure SSH
     hosts: all
-    gather_facts: yes
+    gather_facts: no
     connection: local
 
     tasks:
+      - debug: 
+          msg: "The SSH crypto key generate will fail because of netmiko/ntc timeouts. Comment that out after it becomes no longer necessary."
+
     # this will fail the first time. When it's run once to get your keys, just comment it out.
+    # coming soon - global_delay_factor will be available, but not yet.
       - ntc_config_command:
           connection: ssh
           platform: " {{ platform }}"
@@ -16,7 +20,7 @@
           host: "{{ inventory_hostname }}"
           username: "{{ username }}"
           password: "{{ password }}"
-          global_delay_factor
+          #global_delay_factor: 4
           
     # this will configure ssh parameters
       - ntc_config_command:

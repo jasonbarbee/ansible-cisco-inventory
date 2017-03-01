@@ -73,5 +73,5 @@ RUN mkdir /root/.ssh
 RUN echo "" >> /root/.ssh/known_hosts
 WORKDIR /ansible
 
-RUN pip install mnet
+#RUN pip install mnet
 RUN git clone https://github.com/jasonbarbee/mnet /mnet
