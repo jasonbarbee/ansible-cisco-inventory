@@ -74,4 +74,6 @@ RUN echo "" >> /root/.ssh/known_hosts
 WORKDIR /ansible
 
 RUN pip install git+git://github.com/jasonbarbee/mnet.git
+RUN pip install pydot graphviz
+RUN apt-get install graphviz
 RUN git clone https://github.com/jasonbarbee/mnet /mnet
