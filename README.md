@@ -1,20 +1,18 @@
 # Ansible Cisco Inventory
-For onboarding a network to Cisco My Devices or Cisco TotalCare FAST and EASY.
-For people who don't have time to install a collector, discover subnets, deal with SNMP issues, etc.
 
-## Goal: Help Make Cisco Inventories easier and automated.
+## Onboarding a network to Cisco My Devices or Cisco TotalCare FAST and EASY.
 
 ## Why use this?
-1. You onboard the device once - add it to Ansible inventory. No SNMP or discovery guess work.
-2. Automation - Go ahead and use Ansible for other things.
-3. No data leaves the network other than the CSV.
-4. Easy EOX reports and contract renewal quoting for customers.
-5. Easy IOS version reports via Tagging or CSV export.
-6. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
+1. No SNMP or discovery, no collector required.
+2. Future Automation - Ansible is a powerful automation tool.
+3. Inventory isolation - No data leaves the network other than the CSV.
+4. Cisco My Devices - EOX reports and contract renewal quoting for customers.
+5. Cisco My Devices - IOS version reports. Soon suggested versions, PSIRTs, and defer notices.
+6. Export data to Cisco Totalcare using this toolset.
 7. Assessment tooling to run mass commands and backups for auditing your network.
 
-## Easy way - Docker
-I have build a Docker image that has everything pre-built and ready to literally run a single command(maybe two) to scan a list of IPs.
+## Docker - the easy way
+I built a Docker image that has everything pre-built and ready to run to scan a list of IPs.
 
 ```
 docker pull jasonbarbee/ansible-cisco-inventory
@@ -179,13 +177,13 @@ port: 23
 ```
 An example is included in the report as config-ssh.yml
 
-## Ideas/Future
-* Alternate username/password attempt.
-* Try to make Telnet more accessible.
-* Try to post show output to the CLI Analyzer Tools API for Assessment style data.
+## Project Roadmap
+* Alternate username/password attempt. 
+* Try to make Telnet more comprehensive.
+* Try to post show output to the CLI Analyzer Tools API for Assessment style data. (not likely after talking with product manager of Cisco APIs)
 
 ## Contributing
-I'm open to any pull requests!
+I'm open to any pull requests, contact me or submit a pull request and let's make this better.
 
 ## Helpful Resources to Learn Ansible Tricks
 [Ansible Tricks](http://perfspy.blogspot.com/2016/06/ansible-tricks.html)
