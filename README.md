@@ -13,7 +13,33 @@ For people who don't have time to install a collector, discover subnets, deal wi
 6. Onboard customers to Cisco Totalcare without expensive Scanners or complicated Collectors.
 7. Assessment tooling to run mass commands and backups for auditing your network.
 
-## Prep work - you need Ansible and NTC-Ansible
+## Easy way - Docker
+I have build a Docker image that has everything pre-built and ready to literally run a single command(maybe two) to scan a list of IPs.
+
+```
+docker pull jasonbarbee/ansible-cisco-inventory
+docker run -it -v $(pwd):/ansible/mnt jasonbarbee/ansible-cisco-inventory:latest
+ansible-playbook -i mnt/myinventoryfile cisco-mydevices.yml
+
+```
+Quick explanation of what's going on there- 
+-v mounts a local folder as a volume
+$(pwd) returns the local path you are in to mount it to the /ansible/mnt folder inside docker.
+the -it calls for an interactive session (bash shell)
+CAUTION: If you are new to Docker.... Docker containers do not SAVE any data except in the shared volume area.
+
+Let's say you have a folder on your desktop for inventories. You can mount that and use the Docker Ansbile to reference that, and just run the host file inventory tool inside the container.
+
+Docker will write a mydevices.csv file inside the container. This will not persist past your session, you must copy this out. 
+I plan to address this in the near future with a environment variable...TODO.
+
+For now, take the mydevices.csv output and copy it to the mount folder.
+
+```
+cp mydevices.csv mnt
+```
+
+## To install on Ubuntu - you need Ansible and NTC-Ansible
 1. Install Ansible
 http://docs.ansible.com/ansible/intro_installation.html
 
@@ -126,8 +152,9 @@ $ ansible-playbook -i inventory.yml backup-configs.yml
 https://www.petenetlive.com/KB/Article/0001245
 
 ### Backups Fail for Old Devices?
-This is resulting from a call from PyNTC library to NetMiko. The Author has not provided a way to push the "delay_factor" command - which increases the timeout for these old devices.
-I submitted a pull request... but we're all busy I guess, it's still in limbo.
+PyNTC and NTC-Ansible seem to be adding the global_delay_factor in as a parameter. As of 3/1/2017, that is a pending pull-request and not committed yet.
+I'm not interested in forking to support an alternate branch in this transition.
+
 Quick fix:
 
 sudo (your-editor) /usr/local/lib/python2.7/dist-packages/pyntc/devices/ios_device.py
@@ -143,30 +170,14 @@ Tested on 2950s, 3560s, 2800s, 3850s, 2960Xs...
 ```
 
 ### How about Telnet?
-PyNTC does not support NetMiko's cisco_ios_telnet option and port number. We have to modify their library a little to make this work.
-Once you do this, you should be able to run ntc_config_commands to 
-* set your domain - 
-    * ip domain-name mycooldomain.net
-* generate SSH keys - 
-    * crypto key generate rsa modulus 2048
-* enable it on the VTYs
-    * ip ssh version 2
-    * line vty 0 {{ max_vty }}
-    * transport input ssh telnet
+Yes - via NTC-Ansible. Many of their modules support telnet, including the ntc_config_command, ntc_show_command. However, ntc_save_config does not support telnet. 
 
-I have added some example tooling to get you started. It's untested. Next telnet assessment I do I will clean it up.
-
-add this into /usr/local/lib/python2.7/dist-packages/pyntc/devices/ios_device.py
-    under Class IOSDevice(BaseDevice)
-    right after self.native = None
-```python2
-        if port == 23:
-            self.device_type = 'cisco_ios_telnet'
-            self.port = 23
-        else:
-            self.device_type = 'cisco_ios_ssh'
-            self.port = 22
+pass in parameters to NTC-Ansible like this
 ```
+connection: 'telnet'
+port: 23
+```
+An example is included in the report as config-ssh.yml
 
 ## Ideas/Future
 * Alternate username/password attempt.
