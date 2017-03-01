@@ -16,6 +16,7 @@
           host: "{{ inventory_hostname }}"
           username: "{{ username }}"
           password: "{{ password }}"
+          global_delay_factor
           
     # this will configure ssh parameters
       - ntc_config_command:
