@@ -44,7 +44,7 @@ cp mydevices.csv mnt
 ```
 
 # Diagram a network
-The Docker image is preloaded with MNet - courtesy of Michael Laforest. This will scan the network via a root node, scan each CDP neighbor and build a decent diagram of the network.
+The Docker image is preloaded with MNet. This will scan the network via a root node, scan each CDP neighbor and build a decent diagram of the network.
 
 Look in the /mnet folder
 Edit the mnet.conf with your SNMP Strings and exclusion information. 
@@ -214,5 +214,13 @@ I'm open to any pull requests, contact me or submit a pull request and let's mak
 [Ansible Tricks](http://perfspy.blogspot.com/2016/06/ansible-tricks.html)
 
 
-### License
-MIT
+## License
+MIT License
+Jason Barbee
+
+## Credits
+Many thanks for the following projects used heavily in this toolkit.
+
+MNet Suite is GPL licensed by Michael Laforest.
+NTC-Ansible is Apache Licensed by Jason Edelman.
+Ansible is GPL v3 licensed. Original creator - Michael DeHaan.
