@@ -1,6 +1,12 @@
 # Ansible Cisco Inventory
 
-## Onboarding a network to Cisco My Devices or Cisco TotalCare FAST and EASY.
+## Cisco Assessment Toolkit
+### Features:
+* Inventory
+* SNMP Discovery and Graphing
+* Mass configuration changes
+* Export to Cisco My Devices + Cisco Smartnet Totalcare
+* Ansible with NTC-Ansible preloaded.
 
 ## Why use this?
 1. No SNMP or discovery, no collector required.
@@ -12,7 +18,7 @@
 7. Assessment tooling to run mass commands and backups for auditing your network.
 
 ## Docker - the easy way
-I built a Docker image that has everything pre-built and ready to run to scan a list of IPs.
+I built a Docker image that has everything pre-built and ready to run all tooling.
 
 ```
 docker pull jasonbarbee/ansible-cisco-inventory
@@ -36,6 +42,25 @@ For now, take the mydevices.csv output and copy it to the mount folder.
 ```
 cp mydevices.csv mnt
 ```
+
+# Diagram a network
+The Docker image is preloaded with MNet - courtesy of Michael Laforest. This will scan the network via a root node, scan each CDP neighbor and build a decent diagram of the network.
+
+Look in the /mnet folder
+Edit the mnet.conf with your SNMP Strings and exclusion information. 
+VI is included in the docker image for easy editing. 
+
+Usage:
+```
+cd /mnet
+./mnet.py graph -t MyCustomer -f mycustomer.svg -r 192.168.1.1 -c mnet.conf
+```
+
+Caution: it will generate the file inside docker. You need to copy this file out of Docker - it will not be saved if you exit Docker!
+I would suggest copying the file to the shared folder location above like /ansible/mnt to get it to your desktop.
+
+Example
+![Diagram](screenshots/diagram.png)
 
 ## To install on Ubuntu - you need Ansible and NTC-Ansible
 1. Install Ansible

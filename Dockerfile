@@ -25,7 +25,6 @@ RUN apt-get update && apt-get -y \
 	iputils-ping \
 	telnet \
 	vim \
-	graphviz \
 	wget
 
 # Misc Ansible and Cisco dependancies
@@ -35,8 +34,6 @@ RUN pip install \
 	ntc-ansible \
 	jinja2 \
 	lxml \
-	pydot \
-	graphviz \
 	terminal
    
 
@@ -78,5 +75,9 @@ RUN mv /usr/share/ansible/ntc-ansible/ntc-templates/setup.py /usr/share/ansible/
 
 
 # Copy NTC into Inventory tooling folder
-RUN mkdir /ansible
 RUN cp /usr/share/ansible/ntc-ansible/* -r /ansible/
+
+RUN pip install pydot
+RUN pip install --upgrade pip
+# Had to seperate this after the fact to get the paths and all working - run graphviz seperately
+RUN apt-get -y install graphviz
