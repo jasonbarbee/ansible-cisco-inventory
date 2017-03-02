@@ -202,12 +202,12 @@ sudo apt-get install zlib1g-dev libxml2-dev libxslt-dev python-dev
 pip install terminal
 ```
 
-## Project Roadmap
+## Project Roadmap in Order of Priority
+* Export from SNMP discovery to Ansible hosts file.
+* Exporting Host data for Cisco CLI Analyzer Tool direct input
 * Alternate username/password attempt. 
-* Export from Discovery to text file for Ansible
-* Network inventory database for persistent storage
 * Try to make Telnet more comprehensive.
-* Try to post show output to the CLI Analyzer Tools API for Assessment style data. (not likely after talking with product manager of Cisco APIs)
+* Network inventory database for persistent storage
 
 ## Contributing
 I'm open to any pull requests, contact me or submit a pull request and let's make this better.
@@ -223,5 +223,6 @@ Jason Barbee
 Many thanks for the following projects used heavily in this toolkit.
 
 * MNet Suite is GPL licensed by Michael Laforest.
+https://github.com/MJL85/mnet
 * NTC-Ansible is Apache Licensed by Jason Edelman.
 * Ansible is GPL v3 licensed. Original creator - Michael DeHaan.
