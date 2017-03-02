@@ -204,6 +204,8 @@ pip install terminal
 
 ## Project Roadmap
 * Alternate username/password attempt. 
+* Export from Discovery to text file for Ansible
+* Network inventory database for persistent storage
 * Try to make Telnet more comprehensive.
 * Try to post show output to the CLI Analyzer Tools API for Assessment style data. (not likely after talking with product manager of Cisco APIs)
 
