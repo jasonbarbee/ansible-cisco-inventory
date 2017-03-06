@@ -81,3 +81,5 @@ RUN pip install pydot
 RUN pip install --upgrade pip
 # Had to seperate this after the fact to get the paths and all working - run graphviz seperately
 RUN apt-get -y install graphviz
+
+RUN cp /ansible/ansible.cfg /etc/ansible
