@@ -12,7 +12,7 @@
     # coming soon - global_delay_factor will be available, but not yet.
       - ntc_config_command:
           connection: ssh
-          platform: " {{ platform }}"
+          platform: "{{ platform }}"
           port: "{{ port }}"
           commands:
             - ip domain-name mycooldomain.net
