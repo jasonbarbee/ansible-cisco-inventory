@@ -6,8 +6,8 @@
 # https://github.com/networktocode/ntc-ansible
 
 ---
-  - name: Build CSV for MyDevices.csv
-    hosts: all
+  - name: Inventory Routers and Switches and Build CSV for MyDevices.csv
+    hosts: routers
     gather_facts: no
     connection: local
 

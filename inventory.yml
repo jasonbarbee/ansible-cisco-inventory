@@ -1,8 +1,26 @@
-[routers]
+[sshrouters]
 192.168.1.1
 
+[sshrouters:vars]
+port=22
+connection='ssh'
+platform='cisco_ios_ssh'
+
 [telnetrouters]
-192.168.1.2 connection='telnet' platform='cisco_ios'
+192.168.1.2 
+
+[telnetrouters:vars]
+connection='telnet'
+platform='cisco_ios'
+port=23
+
+[routers:children]
+sshrouters
+telnetrouters
+
+[routers:vars]
+username='username'
+password='password'
 
 [ucs]
 192.168.1.3
@@ -11,9 +29,3 @@
 ucs_username='admin'
 ucs_password='secret'
 
-[routers:vars]
-username='username'
-password='password'
-port=22
-connection='ssh'
-platform='cisco_ios_ssh'

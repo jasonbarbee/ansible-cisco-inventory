@@ -76,7 +76,7 @@ An example - config playbook (config-ssh.yml) is included if you need some guida
 Getting Started:
 1. ansible.cfg should be ntc-ansible folder. It forces the library folder local for NTC-Ansible to load in the same folder. It's automatically loaded in the Docker image, and on this repo.
 2. Onboard devices with Ansible inventory file
-Example
+Mode Basic Example
 ```yaml
 [routers]
 192.168.1.1
@@ -89,7 +89,35 @@ client='MyClientName'
 connection='ssh'
 port=22
 ```
+A more common example is pre-loaded in the repo to allow you to group things together.
+Like calling "routers" to include all your telnetrouters and ssh routers like this.
+Just fill in the IPs and use the framework provided.
 
+```yaml
+[sshrouters]
+192.168.1.1
+
+[sshrouters:vars]
+port=22
+connection='ssh'
+platform='cisco_ios_ssh'
+
+[telnetrouters]
+192.168.1.2 
+
+[telnetrouters:vars]
+connection='telnet'
+platform='cisco_ios'
+port=23
+
+[routers:children]
+sshrouters
+telnetrouters
+
+[routers:vars]
+username='username'
+password='password'
+```
 
 # UCS Inventory
 To export a UCS inventory, which also works with Cisco My Devices - 
@@ -109,10 +137,10 @@ $ ansible-playbook -i inventory.yml ucs-inventory.yml
 You will get a file - *ucs.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
 If using Docker - copy this file off to /mnt (shared folder path)
 
-# Run the Network Inventory on 
+# Router/Switch Inventory
 Scan the network
 ```bash
-$ ansible-playbook -i inventory.yml cisco-mydevices.yml
+$ ansible-playbook -i inventory.yml ios-mydevices.yml
 ```
 You will get a file - *mydevices.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
 If using Docker - copy the configs OFF the Image to /mnt (shared folder path)
