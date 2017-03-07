@@ -54,7 +54,7 @@ For now, take the mydevices.csv output and copy it to the mount folder.
 cp mydevices.csv /mnt
 ```
 
-# Diagram a network
+# Discover and Diagram a network
 The Docker image is preloaded with MNet. This will scan the network via a root node, scan each CDP neighbor and build a decent diagram of the network.
 
 Look in the /mnet folder
@@ -68,8 +68,27 @@ cd /mnet
 ```
 Make sure to use the /mnt path so the diagram will export to your mounted folder outside docker.
 
-Example
+Diagram Example
 ![Diagram](screenshots/diagram.png)
+
+# Discover a network to build an Ansible File of the devices found.
+Run MNET Above but add a parameter to write discovered data to CSV.
+```
+cd /mnet
+./mnet.py graph -t MyCustomer -f /mnt/mycustomer.svg -r 192.168.1.1 -c mnet.conf -C /mnt/mnet-discovered.csv
+```
+Now - convert that to Ansible format
+```
+./mnet2ansible.py -i /mnt/mnet-discovered.csv -o /mnt/discovered-inventory.yml
+```
+
+You will get a file like this
+```yaml
+[discovered]
+10.10.10.10
+10.10.10.11
+10.10.10.11
+```
 
 # Now to Configure Ansible
 I am using Ansible as a CLI parsing tool. So as long as we can login via SSH, we are good. Even telnet in some cases.

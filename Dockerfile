@@ -57,7 +57,8 @@ ENV ANSIBLE_RETRY_FILES_ENABLED false
 RUN rm -rf /ansible
 RUN mkdir /root/.ssh
 RUN echo "" >> /root/.ssh/known_hosts
-RUN echo ""
+RUN export PYTHONPATH="${PYTHONPATH}:/ansible"
+RUN echo "version 0.1"
 
 WORKDIR /ansible
 
