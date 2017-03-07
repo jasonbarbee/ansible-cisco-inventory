@@ -16,8 +16,7 @@ description:
 author: Jason Barbee (@jasonbarbee)
 extends_documentation_fragment: ucs
 options:
-    TODO:
-    output file parameter
+    output_file: - path and filename of CSV export.
     Writes a static ucs.csv file to the ansible folder with serials for mydevices.
 '''
 
@@ -57,7 +56,7 @@ def ucs_inventory(module):
 
     try:
         query_data = ucsm.handle.query_classids('orgOrg', 'EquipmentChassis', 'NetworkElement', 'ComputeBlade')
-        with open('ucs.csv','w+') as ucs_file:
+        with open(module.params.get('output_file'),'w+') as ucs_file:
                 writer = csv.writer(ucs_file)
                 writer.writerow(['Serial Number','Device Name / Hostname','Tags','Notes'])
                 for chassis in query_data['EquipmentChassis']:

@@ -57,6 +57,8 @@ ENV ANSIBLE_RETRY_FILES_ENABLED false
 RUN rm -rf /ansible
 RUN mkdir /root/.ssh
 RUN echo "" >> /root/.ssh/known_hosts
+RUN echo ""
+
 WORKDIR /ansible
 
 RUN pip install git+git://github.com/jasonbarbee/mnet.git
