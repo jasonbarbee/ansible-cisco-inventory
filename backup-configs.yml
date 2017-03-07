@@ -10,12 +10,12 @@
         run_once: true
 
       - name: Creates Client directory
-        file: path="backups/{{ client }}" state=directory
+        file: path="{{ path_prefix }}backups/{{ client }}" state=directory
         run_once: true
 
       - name: SAVE AND BACKUP CONFIGS
         ntc_save_config:
-          local_file=backups/{{ client }}/config_{{ inventory_hostname }}_{{ ansible_date_time.date | replace('-','_') }}.cfg
+          local_file={{path_prefix}}ackups/{{ client }}/config_{{ inventory_hostname }}_{{ ansible_date_time.date | replace('-','_') }}.cfg
           platform={{ platform }}
           port={{ port }}
           host={{ inventory_hostname }}

@@ -29,3 +29,5 @@ password='password'
 ucs_username='admin'
 ucs_password='secret'
 
+[all:vars]
+pathprefix='/mnt/

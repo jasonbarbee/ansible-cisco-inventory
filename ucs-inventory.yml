@@ -4,7 +4,7 @@
       ip: '{{ inventory_hostname }}'
       login: '{{ ucs_username }}'
       password: '{{ ucs_password }}'
-      output_file: '/mnt/ucs-mydevices.csv'
+      output_file: '{{ path_prefix}}ucs-mydevices.csv'
     tags: inventory
     register: inventory
 

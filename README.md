@@ -25,11 +25,16 @@
 
 ## Docker - the easy way
 I built a Docker image that has everything pre-built and ready to run all tooling.
+It will export all files on /mnt, to your mounted folder you pass to Docker.
+*Do not save anything inside Docker!*
+
+Copy your inventory to /mnt like below, and edit it on your local machine outside of docker.
 
 ```
 docker pull jasonbarbee/ansible-cisco-inventory
 docker run -it -v $(pwd):/mnt jasonbarbee/ansible-cisco-inventory:latest
-ansible-playbook -i myinventoryfile cisco-mydevices.yml
+cp /ansible/inventory.yml /mnt/inventory.yml
+ansible-playbook -i /mnt/inventory.yml cisco-mydevices.yml
 
 ```
 Quick explanation of what's going on there- 
@@ -132,17 +137,17 @@ ucs_password='secret'
 ```
 
 ```bash
-$ ansible-playbook -i inventory.yml ucs-inventory.yml
+$ ansible-playbook -i /mnt/inventory.yml ucs-inventory.yml
 ```
-You will get a file - *ucs.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
+You will get a file - */mnt/ucs.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
 If using Docker - copy this file off to /mnt (shared folder path)
 
 # Router/Switch Inventory
 Scan the network
 ```bash
-$ ansible-playbook -i inventory.yml ios-mydevices.yml
+$ ansible-playbook -i /mnt/inventory.yml ios-mydevices.yml
 ```
-You will get a file - *mydevices.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
+You will get a file - */mnt/mydevices.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
 If using Docker - copy the configs OFF the Image to /mnt (shared folder path)
 
 ## Uploading to Cisco MyDevices

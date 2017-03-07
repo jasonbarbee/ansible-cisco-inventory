@@ -56,5 +56,5 @@
         with_items: "{{ inventory }}"
 
       - name: Write My Devices CSV File
-        shell: 'echo {{ item.serial }},{{ item.hostname }},"IP-"{{ item.ip }} "|" "IOS-{{ item.version }}", >> mydevices.csv'
+        shell: 'echo {{ item.serial }},{{ item.hostname }},"IP-"{{ item.ip }} "|" "IOS-{{ item.version }}", >> {{ path_prefix }}mydevices.csv'
         with_items: "{{ inventory }}"
