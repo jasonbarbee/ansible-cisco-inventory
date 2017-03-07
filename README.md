@@ -32,7 +32,7 @@ Copy your inventory to /mnt like below, and edit it on your local machine outsid
 
 ```
 docker pull jasonbarbee/ansible-cisco-inventory
-docker run -it -v $(pwd):/mnt jasonbarbee/ansible-cisco-inventory:latest
+docker run --net=host -it -v $(pwd):/mnt jasonbarbee/ansible-cisco-inventory:latest
 cp /ansible/inventory.yml /mnt/inventory.yml
 ansible-playbook -i /mnt/inventory.yml cisco-mydevices.yml
 
