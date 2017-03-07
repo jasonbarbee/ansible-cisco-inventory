@@ -1,4 +1,5 @@
   - name: UCS Inventory
+    hosts: ucs
     ucs_inventory:
       ip: '{{ inventory_hostname }}'
       login: '{{ ucs_username }}'
@@ -6,5 +7,5 @@
     tags: inventory
     register: inventory
 
-  - debug: var=inventory
-    tags: inventory
+  # - debug: var=inventory
+  #   tags: inventory

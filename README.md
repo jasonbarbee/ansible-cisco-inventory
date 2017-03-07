@@ -3,6 +3,10 @@
 ## Cisco Assessment Toolkit
 ### Features:
 * Inventory
+    * Routers
+    * Switches
+    * UCS FI,Chassis,Compute resources.
+    * Callmanager Devices (coming soon)
 * SNMP Discovery and Graphing
 * Mass configuration changes
 * Export to Cisco My Devices + Cisco Smartnet Totalcare
@@ -86,7 +90,26 @@ connection='ssh'
 port=22
 ```
 
-# Run the Network Inventory
+
+# UCS Inventory
+To export a UCS inventory, which also works with Cisco My Devices - 
+Edit your inventory.yml file with something like this, example in the repo here.
+```yaml
+[ucs]
+192.168.1.3
+
+[ucs:vars]
+ucs_username='admin'
+ucs_password='secret'
+```
+
+```bash
+$ ansible-playbook -i inventory.yml ucs-inventory.yml
+```
+You will get a file - *ucs.csv*. This file can be uploaded straight to Cisco My Devices Tool (below)
+If using Docker - copy this file off to /mnt (shared folder path)
+
+# Run the Network Inventory on 
 Scan the network
 ```bash
 $ ansible-playbook -i inventory.yml cisco-mydevices.yml
