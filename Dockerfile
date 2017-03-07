@@ -58,7 +58,12 @@ RUN rm -rf /ansible
 RUN mkdir /root/.ssh
 RUN echo "" >> /root/.ssh/known_hosts
 RUN export PYTHONPATH="${PYTHONPATH}:/ansible"
-RUN echo "version 0.1"
+RUN pip install pydot
+RUN pip install --upgrade pip
+# Had to seperate this after the fact to get the paths and all working - run graphviz seperately
+RUN apt-get -y install graphviz
+
+RUN echo "version 0.2"
 
 WORKDIR /ansible
 
@@ -81,9 +86,5 @@ RUN mv /usr/share/ansible/ntc-ansible/ntc-templates/setup.py /usr/share/ansible/
 # Copy NTC into Inventory tooling folder
 RUN cp /usr/share/ansible/ntc-ansible/* -r /ansible/
 
-RUN pip install pydot
-RUN pip install --upgrade pip
-# Had to seperate this after the fact to get the paths and all working - run graphviz seperately
-RUN apt-get -y install graphviz
 
 RUN cp /ansible/ansible.cfg /etc/ansible
