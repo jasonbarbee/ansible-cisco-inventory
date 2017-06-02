@@ -88,3 +88,5 @@ RUN cp /usr/share/ansible/ntc-ansible/* -r /ansible/
 
 
 RUN cp /ansible/ansible.cfg /etc/ansible
+
+RUN pip install --upgrade paramiko
