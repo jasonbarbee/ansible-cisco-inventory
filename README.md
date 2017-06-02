@@ -34,7 +34,7 @@ Copy your inventory to /mnt like below, and edit it on your local machine outsid
 docker pull jasonbarbee/ansible-cisco-inventory
 docker run --net=host -it -v $(pwd):/mnt jasonbarbee/ansible-cisco-inventory:latest
 cp /ansible/inventory.yml /mnt/inventory.yml
-ansible-playbook -i /mnt/inventory.yml cisco-mydevices.yml
+ansible-playbook -i /mnt/inventory.yml ios-inventory.yml
 
 ```
 Quick explanation of what's going on there- 
@@ -289,7 +289,7 @@ I'm open to any pull requests, contact me or submit a pull request and let's mak
 
 ## Helpful Resources to Learn Ansible Tricks
 [Ansible Tricks](http://perfspy.blogspot.com/2016/06/ansible-tricks.html)
-
+[Ansible Language Examples](https://github.com/ansible/ansible-examples)
 ## License
 MIT License
 Jason Barbee
